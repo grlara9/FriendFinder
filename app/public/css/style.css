@@ -1,0 +1,28 @@
+body {
+    background-color: bisque;
+}
+
+h1{
+    font-size: 70px;
+    text-align: center;
+    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Anton', sans-serif;
+    margin-top: 10%;
+}
+
+p{
+    font-weight: lighter;
+    text-align: center;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.center{
+    text-align: center;
+}
+.survey h2{
+    font-size: 70px;
+    text-align: center;
+    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Anton', sans-serif;
+    
+}
