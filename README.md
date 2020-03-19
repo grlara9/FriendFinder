@@ -6,6 +6,10 @@
 ## Demo
 Friend Finder is deployed to heroku. check it out [pip](https://pure-woodland-85505.herokuapp.com/)
 
+## Screenshot
+
+![alt test](app/screenshots/friend.png)
+
 ## Technologies used
 
 * Node.js
