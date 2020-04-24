@@ -32,7 +32,7 @@ module.exports = function(app){
                 bestMatch.friendDifference = totalDifference;
             }
         }
-            friends.push(userData);
-            res.json(bestMatch);
-        })
-    };
+        friends.push(userData);
+        res.json(bestMatch);
+    })
+};
