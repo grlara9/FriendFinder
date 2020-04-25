@@ -3,12 +3,10 @@
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Anton|Titillium+Web:600&display=swap" rel="stylesheet">
-
+   
     <!-- Chosen -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
-   
+    
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
@@ -161,66 +159,68 @@
               </div>
             </div>
                   
-
             <script src="https://code.jquery.com/jquery.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+          
             <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
-         
-         <script type="text/javascript">
-            $("#submit").on("click", function(event){
+
+            <script type="text/javascript">
+            $("#submit").on("click", function(event) {
               event.preventDefault();
-
-              function isValid(){
-                var validate = true;
-                $(".form-control").each(function(){
-
-                if ($(this).val()===""){
-                  validate = false;
-                }
-                })
-                $(".chosen-selected").each(function(){
-                  if($(this).val()===""){
-                    validate=false;
+        
+              // Form validation
+              function validateForm() {
+                var isValid = true;
+                $(".form-control").each(function() {
+                  if ($(this).val() === "") {
+                    isValid = false;
                   }
-                })
-                return validate;
+                });
+        
+                $(".chosen-select").each(function() {
+        
+                  if ($(this).val() === "") {
+                    isValid = false;
+                  }
+                });
+                return isValid;
               }
-              //// Create an object for the users data
-              if(isValid()){
-
-              var data = {
-                name: $("#name").val(),
-                photo: $("#photo").val(),
-                scores: [
-                $("#q1").val(),
-                $("#q2").val(),
-                $("#q3").val(),
-                $("#q4").val(),
-                $("#q5").val(),
-                $("#q6").val(),
-                $("#q7").val(),
-                $("#q8").val(),
-                $("#q9").val(),
-                $("#q10").val()
-                ]
-              };
-              
-              console.log("this is data: " + data)
-            $.post("/api/friends", data, function(response){
-
-              // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-              $("#match-name").text(response.name);
-              $("#match-img").attr("src", response.photo);
-
-              // Show the modal with the best match
-              $("#results-modal").modal("toggle");
-
-            })
-          }else{
-            alert("Fill all Fields please!")
-          }
-            })
-              
-    </script>
+        
+              // If all required fields are filled
+              if (validateForm()) {
+                // Create an object for the user"s data
+                var userData = {
+                  name: $("#name").val(),
+                  photo: $("#photo").val(),
+                  scores: [
+                    $("#q1").val(),
+                    $("#q2").val(),
+                    $("#q3").val(),
+                    $("#q4").val(),
+                    $("#q5").val(),
+                    $("#q6").val(),
+                    $("#q7").val(),
+                    $("#q8").val(),
+                    $("#q9").val(),
+                    $("#q10").val()
+                  ]
+                };
+        
+                // AJAX post the data to the friends API.
+                $.post("/api/friends", userData, function(data) {
+        
+                  // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+                  $("#match-name").text(data.name);
+                  $("#match-img").attr("src", data.photo);
+        
+                  // Show the modal with the best match
+                  $("#results-modal").modal("toggle");
+        
+                });
+              } else {
+                alert("Please fill out all fields before submitting!");
+              }
+            });
+          </script>
   </body>
 </html>
